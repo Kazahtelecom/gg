@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://cg26q6lyjuoih"]
+
+[ext_resource type="Theme" uid="uid://ceno50mosps8a" path="res://scenes/ui/game_ui_theme.tres" id="1_35d7g"]
+[ext_resource type="Script" uid="uid://56wdknk1ddpj" path="res://scenes/ui/game_menu_srean.gd" id="1_e18ke"]
+[ext_resource type="PackedScene" uid="uid://bq4g65fekph13" path="res://scenes/ui/test_menu_screen_background.tscn" id="1_f3kui"]
+[ext_resource type="PackedScene" uid="uid://dyr8e7bsu37u8" path="res://scenes/components/mouse_cursor_component.tscn" id="2_14l5f"]
+[ext_resource type="Texture2D" uid="uid://grxu1hl4ff7d" path="res://Assets/ui/Triangle Mouse icon 1.png" id="3_kdyaf"]
+
+[node name="GameMenuSrean" type="CanvasLayer"]
+script = ExtResource("1_e18ke")
+
+[node name="MouseCursorComponent" parent="." instance=ExtResource("2_14l5f")]
+cursor_component_texture = ExtResource("3_kdyaf")
+
+[node name="TestscenGameMenu" parent="." instance=ExtResource("1_f3kui")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_35d7g")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.768627, 0.603922, 0.423529, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 54
+text = "CATLANDIA"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="StartGameButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 29)
+layout_mode = 2
+theme_type_variation = &"GameMenuButton"
+text = "START"
+
+[node name="SaveGameButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 29)
+layout_mode = 2
+theme_type_variation = &"GameMenuButton"
+text = "SAVE"
+
+[node name="ExitGameButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 29)
+layout_mode = 2
+theme_type_variation = &"GameMenuButton"
+text = "EXIT"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SaveGameButton" to="." method="_on_save_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]

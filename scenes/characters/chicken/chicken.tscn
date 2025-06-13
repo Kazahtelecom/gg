@@ -1,0 +1,112 @@
+[gd_scene load_steps=16 format=3 uid="uid://b7tamy16u4at1"]
+
+[ext_resource type="Script" uid="uid://rmq754qgeofa" path="res://scenes/characters/chicken/chicken.gd" id="1_r6a33"]
+[ext_resource type="Texture2D" uid="uid://dqg0acvvsy3aj" path="res://Assets/game/Characters/Free Chicken Sprites.png" id="2_rsly8"]
+[ext_resource type="Script" uid="uid://j2i5qqgqi241" path="res://script/state_mahine/node_state_machine.gd" id="3_31inw"]
+[ext_resource type="Script" uid="uid://3tc05qtd75fw" path="res://scenes/characters/chicken/idle.gd" id="4_r6a33"]
+[ext_resource type="Script" uid="uid://kmj5lysndlja" path="res://scenes/characters/chicken/walk_satate.gd" id="5_r6a33"]
+[ext_resource type="PackedScene" uid="uid://x2p56b8e68fy" path="res://scenes/components/audio_time_component.tscn" id="6_hv82h"]
+[ext_resource type="PackedScene" uid="uid://bxt57r8ogq3av" path="res://audio/sfc/chickenclickmult.tscn" id="7_wh5lc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awcwn"]
+atlas = ExtResource("2_rsly8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31inw"]
+atlas = ExtResource("2_rsly8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6a33"]
+atlas = ExtResource("2_rsly8")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asyyu"]
+atlas = ExtResource("2_rsly8")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hv82h"]
+atlas = ExtResource("2_rsly8")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wh5lc"]
+atlas = ExtResource("2_rsly8")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vmevo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awcwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31inw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6a33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asyyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hv82h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wh5lc")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ft40v"]
+radius = 4.12311
+
+[node name="chicen" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 64
+script = ExtResource("1_r6a33")
+metadata/_custom_type_script = "uid://cmja8atulrtb5"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
+sprite_frames = SubResource("SpriteFrames_vmevo")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_ft40v")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 5.0
+
+[node name="StateMahine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("3_31inw")
+initial_node_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="StateMahine" node_paths=PackedStringArray("character", "animated_sprite_2d")]
+script = ExtResource("4_r6a33")
+character = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="Walk" type="Node" parent="StateMahine" node_paths=PackedStringArray("character", "animated_sprite_2d", "navigation_agent_2d")]
+script = ExtResource("5_r6a33")
+character = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+navigation_agent_2d = NodePath("../../NavigationAgent2D")
+
+[node name="AudioTimeComponent" parent="." node_paths=PackedStringArray("Audio_stream_player_2B") instance=ExtResource("6_hv82h")]
+wait_time = 5.0
+autostart = true
+Audio_stream_player_2B = NodePath("../chickenclickmult")
+
+[node name="chickenclickmult" parent="." instance=ExtResource("7_wh5lc")]
+volume_db = -25.0

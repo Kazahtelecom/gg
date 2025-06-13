@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://f3ilb5awwmm5"]
+
+[ext_resource type="AudioStream" uid="uid://c8uin37coc5d5" path="res://Assets/Audio/music/tributary - Lish Grooves (online-audio-converter.com).ogg" id="1_vyxhg"]
+
+[node name="chickenCluck1SFX" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_vyxhg")
+bus = &"SFX"

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c8uin37coc5d5"
+path="res://.godot/imported/tributary - Lish Grooves (online-audio-converter.com).ogg-544d908fd4caa7f40b64cb02e5d323c4.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/music/tributary - Lish Grooves (online-audio-converter.com).ogg"
+dest_files=["res://.godot/imported/tributary - Lish Grooves (online-audio-converter.com).ogg-544d908fd4caa7f40b64cb02e5d323c4.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

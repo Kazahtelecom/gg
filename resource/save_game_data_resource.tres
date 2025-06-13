@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SaveGameDataResource" load_steps=3 format=3 uid="uid://cqxmysr121p6q"]
+
+[ext_resource type="Script" uid="uid://bjd82r6ktblee" path="res://resource/node_data_resource.gd" id="1_0ijty"]
+[ext_resource type="Script" uid="uid://btqfs1nk776y1" path="res://resource/save_game_data_resource.gd" id="2_c5kq8"]
+
+[resource]
+script = ExtResource("2_c5kq8")
+save_data_nodes = Array[ExtResource("1_0ijty")]([])
